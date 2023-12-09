@@ -1,0 +1,6 @@
+**__pycache__/
+docs/html/
+docs/latex/
+output/*
+*.lprof
+.pytest_cache
