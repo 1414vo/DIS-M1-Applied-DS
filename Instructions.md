@@ -1,6 +1,6 @@
 # Coursework
 
-This repository is for the submission of your coursework for the M1 Applied Data Science module. 
+This repository is for the submission of your coursework for the M1 Applied Data Science module.
 
 You have been given access with the role of "Maintainer" for this repository which will expire on the 20th of December at 23:59, which is the submission deadline for this work. Please check in good time that you have appropriate access permissions to your project and that the access expires at the appropriate time
 
@@ -26,7 +26,7 @@ You will be assessed on:
  - How informative and well-explained your plots are
  - The writing quality and style including the spelling and grammar
 
-Your code should be written in Python. You may use any libraries that have been discussed during the course (in particular `scikit-learn`). It should be simple to run and be runnable from the command line. You should prioritise writing clear code over fast code. You may create separate scripts for different questions, provided these are clearly identifiable. 
+Your code should be written in Python. You may use any libraries that have been discussed during the course (in particular `scikit-learn`). It should be simple to run and be runnable from the command line. You should prioritise writing clear code over fast code. You may create separate scripts for different questions, provided these are clearly identifiable.
 
 The project should contain a `README.md` file which describes **exactly** how to run the code. You should provide a Conda environment (e.g. an `environment.yml` file).
 Please include your `README.md` file as an Appendix of your report (that will not count towards the word limit) and provide some details of how long it took you to run your code and the specifications of the machine you ran it on.
@@ -44,8 +44,6 @@ Failure to adequately cite use of these tools is considered academic misconduct.
 
 You should write a report of **no more than 3000 words**. The report should be written in LaTeX. Your report should contain two sections, labelled "Section A" and "Section B". You should aim to be concise, while fully answering each question. You should not try to answer a question using more approaches than is indicated. It is more important that you explain and justify your approach than it is to get the answer "right".
 
-Both your code **and** your report should be submitted in this repository. 
+Both your code **and** your report should be submitted in this repository.
 The generated PDF of your report should be placed in the `report` subdirectory.
 The `README.md` file should contain short and simple instructions on how to run your code. Please **make sure** your code is portable and reproducible within the Conda environment.  I will not be able to spend much time and effort attempting to debug your code if it does not run as described.
-
-
