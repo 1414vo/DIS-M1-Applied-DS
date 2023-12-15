@@ -4,3 +4,5 @@ docs/latex/
 output/*
 *.lprof
 .pytest_cache
+data/
+notebooks/
