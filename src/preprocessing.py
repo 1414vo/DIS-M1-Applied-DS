@@ -99,7 +99,11 @@ class LOFRemove(BaseEstimator):
         self.lof.fit_predict(X_rescaled)
         scores = -self.lof.negative_outlier_factor_
         is_inlier = scores < self.threshold
-        return X[is_inlier]
+
+        if y is None:
+            return X[is_inlier]
+        else:
+            return X[is_inlier], y[is_inlier]
 
 
 class NZVarianceRemover(BaseEstimator):
@@ -120,4 +124,9 @@ class NZVarianceRemover(BaseEstimator):
         for i in range(data.shape[1]):
             if stats.mode(data[:, i]).count / data.shape[0] < self.frequency_threshold:
                 column_mask[i] = True
+        print(f"Found {np.count_nonzero(column_mask)} columns with Near-Zero Variance")
         return data[:, column_mask].copy()
+
+    def fit_transform(self, X, y=None):
+        self.fit(X, y)
+        return self.transform(X, y)
