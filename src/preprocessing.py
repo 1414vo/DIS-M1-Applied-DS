@@ -5,6 +5,7 @@ from sklearn.impute import KNNImputer
 from sklearn.linear_model import LogisticRegression
 import pandas as pd
 import numpy as np
+import scipy.stats as stats
 
 
 class DuplicateRemover(BaseEstimator):
@@ -99,3 +100,24 @@ class LOFRemove(BaseEstimator):
         scores = -self.lof.negative_outlier_factor_
         is_inlier = scores < self.threshold
         return X[is_inlier]
+
+
+class NZVarianceRemover(BaseEstimator):
+    def __init__(self, frequency_threshold=0.9):
+        super(NZVarianceRemover, self).__init__()
+        self.frequency_threshold = frequency_threshold
+
+    def fit(self, X, y=None):
+        pass
+
+    def transform(self, X, y=None):
+        if isinstance(X, pd.DataFrame):
+            data = X.values
+        else:
+            data = X.copy()
+
+        column_mask = np.zeros(data.shape[1], dtype=bool)
+        for i in range(data.shape[1]):
+            if stats.mode(data[:, i]).count / data.shape[0] < self.frequency_threshold:
+                column_mask[i] = True
+        return data[:, column_mask].copy()
