@@ -110,11 +110,9 @@ class NZVarianceRemover(BaseEstimator):
     def __init__(self, frequency_threshold=0.9):
         super(NZVarianceRemover, self).__init__()
         self.frequency_threshold = frequency_threshold
+        self.column_mask = None
 
     def fit(self, X, y=None):
-        pass
-
-    def transform(self, X, y=None):
         if isinstance(X, pd.DataFrame):
             data = X.values
         else:
@@ -124,8 +122,16 @@ class NZVarianceRemover(BaseEstimator):
         for i in range(data.shape[1]):
             if stats.mode(data[:, i]).count / data.shape[0] < self.frequency_threshold:
                 column_mask[i] = True
-        print(f"Found {np.count_nonzero(column_mask)} columns with Near-Zero Variance")
-        return data[:, column_mask].copy()
+        self.column_mask = column_mask
+        print(f"Found {np.count_nonzero(~column_mask)} columns with Near-Zero Variance")
+
+    def transform(self, X, y=None):
+        if isinstance(X, pd.DataFrame):
+            data = X.values
+        else:
+            data = X.copy()
+
+        return data[:, self.column_mask].copy()
 
     def fit_transform(self, X, y=None):
         self.fit(X, y)
