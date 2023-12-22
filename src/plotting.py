@@ -5,20 +5,29 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def visualize_clusters(data, model, transform, n_clusters):
-    clusters = model.predict(data)
-    # Obtain model centers
-    centroids = model.cluster_centers_
+def visualize_clusters(
+    data, model, transform, n_clusters, hues=None, cmap=None, has_centroids=True
+):
+    clusters = model.fit_predict(data)
     reduced_data = transform.transform(data)
-    coords = transform.transform(centroids)
-    cen_x = coords[:, 0]
-    cen_y = coords[:, 1]
 
     colors = color_list(n_clusters)
     point_colors = np.vectorize(lambda x: colors[x])(clusters)
     plt.figure(figsize=(8, 8))
-    plt.scatter(reduced_data[:, 0], reduced_data[:, 1], c=point_colors, alpha=0.6, s=10)
-    plt.scatter(cen_x, cen_y, marker="^", c=colors, s=70, edgecolors="black")
+    plt.scatter(
+        reduced_data[:, 0],
+        reduced_data[:, 1],
+        c=point_colors if hues is None else hues,
+        cmap=cmap,
+        alpha=0.6,
+        s=10,
+    )
+    if has_centroids:
+        centroids = model.cluster_centers_
+        coords = transform.transform(centroids)
+        cen_x = coords[:, 0]
+        cen_y = coords[:, 1]
+        plt.scatter(cen_x, cen_y, marker="^", c=colors, s=70, edgecolors="black")
 
     for i in np.unique(clusters):
         points = reduced_data[clusters == i]
@@ -39,7 +48,7 @@ def visualize_clusters(data, model, transform, n_clusters):
 
 
 def visualize_clusters_no_hull(data, model, transform, n_clusters):
-    clusters = model.predict(data)
+    clusters = model.fit_predict(data)
     # Obtain model centers
     centroids = model.cluster_centers_
     reduced_data = transform.transform(data)
