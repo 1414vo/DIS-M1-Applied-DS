@@ -104,7 +104,7 @@ class ClassifierPipeline(BaseEstimator, ClassifierMixin):
         if "outlier_threshold" in parameters:
             self.outlier_treshold = parameters["outlier_threshold"]
             parameters.pop("outlier_threshold")
-        self.model.set_params(**parameters)
+        self.model_args = parameters
         self._generate_estimators()
         return self
 
