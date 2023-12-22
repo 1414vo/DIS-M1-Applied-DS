@@ -16,7 +16,14 @@ import numpy as np
 
 
 def visualize_clusters(
-    data, model, transform, n_clusters, hues=None, cmap=None, has_centroids=True
+    data,
+    model,
+    transform,
+    n_clusters,
+    hues=None,
+    cmap=None,
+    has_centroids=True,
+    fit=True,
 ):
     """! Visualizes the clusters and their centroids if available. Also draws a convex hull around
     the clusters. Adapted from https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489
@@ -28,8 +35,12 @@ def visualize_clusters(
     @param hues             A list of hues for how the points could be coloured.
     @param cmap             If hues, are specified a colormap is required.
     @param has_centroids    Whether the model produces centroids.
+    @param fit              Whether the model needs to be fitted.
     """
-    clusters = model.fit_predict(data)
+    if fit:
+        clusters = model.fit_predict(data)
+    else:
+        clusters = model.predict(data)
     reduced_data = transform.transform(data)
 
     colors = color_list(n_clusters)
@@ -77,7 +88,7 @@ def visualize_clusters(
     plt.ylabel("PCA Component 2")
 
 
-def visualize_clusters_no_hull(data, model, transform, n_clusters):
+def visualize_clusters_no_hull(data, model, transform, n_clusters, fit=True):
     """! Visualizes the clusters and their centroids if available without drawing a convex hull.
     Adapted from https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489
 
@@ -85,8 +96,12 @@ def visualize_clusters_no_hull(data, model, transform, n_clusters):
     @param model            The clustering algorithm. Is not necessary to be fitted.
     @param transform        The transformation that is applied for the data, i.e. PCA.
     @param n_clusters       The number of clusters.
+    @param fit              Whether the model needs to be fitted.
     """
-    clusters = model.fit_predict(data)
+    if fit:
+        clusters = model.fit_predict(data)
+    else:
+        clusters = model.predict(data)
     # Obtain model centers
     centroids = model.cluster_centers_
     # Apply transformation on data

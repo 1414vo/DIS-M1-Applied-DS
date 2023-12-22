@@ -5,4 +5,3 @@ output/*
 *.lprof
 .pytest_cache
 data/
-notebooks/
