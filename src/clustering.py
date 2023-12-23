@@ -20,7 +20,7 @@ def compare_clusters(X, model_1: ClusterMixin, model_2: ClusterMixin):
     pred_1 = model_1.fit_predict(X)
     pred_2 = model_2.fit_predict(X)
 
-    compare_predictions(pred_1, pred_2)
+    return compare_predictions(pred_1, pred_2)
 
 
 def compare_predictions(pred_1, pred_2):

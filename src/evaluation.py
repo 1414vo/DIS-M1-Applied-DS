@@ -63,6 +63,3 @@ def evaluate_clustering(n_clusters_options, X, model: ClusterMixin):
     )
     plt.xlabel("Number of clusters")
     plt.legend()
-
-    plt.suptitle("Evaluation of clustering model")
-    plt.show()
