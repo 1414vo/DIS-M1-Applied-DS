@@ -47,11 +47,12 @@ The primary concern when using Conda is to install the required packages. In thi
 ```conda activate <envname> ```
 
 ## Running the tasks
+Before running the tasks, put all the necessary data in the `/data` folder.
 
 Each task has been solved in a separate Jupyter Notebook, found in the `/notebooks` folder. Notebooks were chosen instead of executables due to the vast amount of plots that needed to be presented.
 
 To start Jupyter, simply run one of the following commands:
-- From a Docker container: ```jupyter notebook --ip 0.0.0.0 --no-browser```
+- From a Docker container: ```jupyter notebook --ip 0.0.0.0 --no-browser --allow-root```. After that, the command should print out URLs which can be pasted in a browser on the local system.
 - From a local terminal ```jupyter notebok --ip=*```
 
 The notebooks can then be executed sequentially. Note that Question 4 takes a long amount of time to run (15-20 minutes if the machine is overloaded).

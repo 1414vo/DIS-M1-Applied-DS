@@ -4,6 +4,8 @@ WORKDIR ./ivp24
 
 COPY . .
 
+RUN mkdir data
+
 RUN apt-get update && apt-get install -y \
     git
 
