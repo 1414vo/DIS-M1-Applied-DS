@@ -54,7 +54,7 @@ To start Jupyter, simply run one of the following commands:
 - From a Docker container: ```jupyter notebook --ip 0.0.0.0 --no-browser```
 - From a local terminal ```jupyter notebok --ip=*```
 
-The notebooks can then be executed sequentially.
+The notebooks can then be executed sequentially. Note that Question 4 takes a long amount of time to run (15-20 minutes if the machine is overloaded).
 ## Frameworks
 
 The entire project was built on **Python** and uses the following packages:
@@ -76,4 +76,4 @@ Currently, the build is complete and the program can be used to its full capacit
 
 ## Credits
 
-Plotting utilities were adapted from <a href="https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489">TowardsDataScience</a> and .
+Plotting utilities were adapted from <a href="https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489">TowardsDataScience</a>.

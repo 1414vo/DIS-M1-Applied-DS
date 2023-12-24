@@ -8,6 +8,7 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.base import ClassifierMixin, ClusterMixin
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     confusion_matrix,
     ConfusionMatrixDisplay,
@@ -62,4 +63,37 @@ def evaluate_clustering(n_clusters_options, X, model: ClusterMixin):
         n_clusters_options, explained_variance_scores, label="Variance Ratio Criterion"
     )
     plt.xlabel("Number of clusters")
+    plt.legend()
+
+
+def optimize_random_forest(n_trees_options, X_train, y_train, X_test, y_test):
+    """! Displays the OOB, train and test scores for a given dataset.
+
+    @param n_trees_options   A list of options for the number of trees in the forest.
+    @param X_train           The train sample set.
+    @param y_train           The ground truth labels for the train set.
+    @param X_test            The test sample set.
+    @param y_test            The ground truth labels for the test set."""
+    scores = []
+    train_scores = []
+    test_scores = []
+    # Reoptimize for less features
+    for n_trees in n_trees_options:
+        classifier = RandomForestClassifier(
+            random_state=42, oob_score=True, n_estimators=n_trees
+        )
+        classifier.fit(X_train, y_train)
+        # Calculate training OOB score
+        score = classifier.oob_score_
+        scores.append(score)
+        test_scores.append(classifier.score(X_test, y_test))
+        train_scores.append(classifier.score(X_train, y_train))
+
+    sns.set()
+    plt.figure(dpi=300)
+    plt.plot(n_trees_options, train_scores, label="Train accuracy")
+    plt.plot(n_trees_options, scores, label="Train OOB accuracy")
+    plt.plot(n_trees_options, test_scores, label="Test accuracy")
+    plt.xlabel("Number of trees")
+    plt.ylabel("Accuracy")
     plt.legend()
