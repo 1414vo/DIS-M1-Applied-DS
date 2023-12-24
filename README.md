@@ -47,7 +47,7 @@ The primary concern when using Conda is to install the required packages. In thi
 ```conda activate <envname> ```
 
 ## Running the tasks
-Before running the tasks, put all the necessary data in the `/data` folder.
+Before running the tasks, put all the necessary data in the `/data` folder (using ```docker cp <data location> ads:/ivp24/data``` with Docker).
 
 Each task has been solved in a separate Jupyter Notebook, found in the `/notebooks` folder. Notebooks were chosen instead of executables due to the vast amount of plots that needed to be presented.
 
